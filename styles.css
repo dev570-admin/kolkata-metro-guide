@@ -1,0 +1,123 @@
+/* Custom CSS for Kolkata Metro & Smart Travel Guide */
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-blue: #0F4C81;
+  --primary-blue-dark: #0A3256;
+  --accent-yellow: #F5BC15;
+  --bg-light: #F3F4F6;
+}
+
+body {
+  font-family: 'Inter', 'Hind Siliguri', sans-serif;
+  background: radial-gradient(circle at 10% 20%, rgb(15, 76, 129) 0%, rgb(10, 50, 86) 90.2%);
+  min-height: 100vh;
+}
+
+/* Glassmorphism details */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark-glass-panel {
+  background: rgba(15, 76, 129, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(15, 76, 129, 0.1);
+}
+
+/* Phone screen mockup container */
+.phone-mockup {
+  width: 100%;
+  max-width: 440px;
+  height: 100vh;
+  max-height: 880px;
+  border-radius: 40px;
+  border: 12px solid #111827;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  background-color: var(--bg-light);
+}
+
+@media (max-width: 640px) {
+  .phone-mockup {
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border: none;
+    border-radius: 0;
+  }
+}
+
+/* Custom scrollbars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(15, 76, 129, 0.3);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 76, 129, 0.5);
+}
+
+/* Live train timer pulsing animation */
+@keyframes pulse-live {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.4;
+  }
+}
+
+.live-indicator {
+  animation: pulse-live 1.8s infinite ease-in-out;
+}
+
+/* Premium Gold Shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.premium-shimmer {
+  background: linear-gradient(90deg, #b45309 0%, #f59e0b 25%, #fbbf24 50%, #f59e0b 75%, #b45309 100%);
+  background-size: 200% auto;
+  animation: shimmer 4s infinite linear;
+}
+
+/* QR Code scan line */
+@keyframes scan {
+  0% {
+    top: 0%;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0%;
+  }
+}
+
+.scan-line {
+  animation: scan 2.5s infinite linear;
+}
+
+/* Transitions */
+.transition-all-300 {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

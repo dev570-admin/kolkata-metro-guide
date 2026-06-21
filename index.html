@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="description"
+    content="কলকাতা মেট্রো ও স্মার্ট ট্রাভেল গাইড - কলকাতার প্রথম সম্পূর্ণ ডিজিটাল ট্রানজিট কম্প্যানিয়ন। লাইভ ট্রেন কাউন্টডাউন, স্মার্ট গেট গাইড ও বাসের বিবরণ জানুন সহজেই।">
+  <title>কলকাতা মেট্রো ও স্মার্ট ট্রাভেল গাইড | Kolkata Metro & Smart Travel Guide</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            transitBlue: {
+              DEFAULT: '#0F4C81',
+              dark: '#0A3256',
+              light: '#1D72B8',
+            },
+            transitYellow: {
+              DEFAULT: '#F5BC15',
+              dark: '#D5A00E',
+              light: '#FCE082',
+            },
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body
+  class="flex items-center justify-center min-h-screen text-gray-800 p-0 sm:p-4 md:p-8 selection:bg-transitYellow selection:text-transitBlue-dark">
+
+  <!-- Desktop Decorative Dashboard Layout -->
+  <div class="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center justify-center">
+
+    <!-- Left Column: Branding & Features (Visible only on larger screens) -->
+    <div class="hidden lg:flex lg:col-span-7 flex-col gap-6 text-white pr-6">
+      <div class="flex items-center gap-4">
+        <div class="bg-white p-2.5 rounded-2xl shadow-lg border border-white/20">
+          <img src="logo.png" alt="Kolkata Metro & Smart Travel Guide Logo" class="w-16 h-16 object-contain rounded-xl">
+        </div>
+        <div>
+          <h1 class="text-3xl font-extrabold tracking-tight font-sans">কলকাতা মেট্রো ও স্মার্ট ট্রাভেল গাইড</h1>
+          <p class="text-sm font-semibold tracking-wide text-transitYellow uppercase">Kolkata Metro & Smart Travel Guide
+          </p>
+        </div>
+      </div>
+
+      <p class="text-lg text-blue-100 leading-relaxed font-light">
+        কলকাতার দৈনিক যাতায়াতকারীদের জন্য তৈরি একটি প্রিমিয়াম ট্রানজিট মোবাইল অ্যাপ্লিকেশন। মেট্রোর লাইভ টাইমিং,
+        কানেক্টিং বাস রুট এবং সহজতম স্মার্ট এক্সিট নির্দেশিকা এখন আপনার হাতের মুঠোয়।
+      </p>
+
+      <div class="grid grid-cols-2 gap-4 mt-2">
+        <div class="glass-panel text-gray-800 p-4 rounded-2xl flex items-start gap-3">
+          <div class="bg-blue-100 p-2.5 rounded-xl text-transitBlue">
+            <i data-lucide="clock" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-transitBlue-dark">লাইভ ট্রেন ট্র্যাকিং</h3>
+            <p class="text-xs text-gray-500 mt-0.5">পরবর্তী ট্রেনের সঠিক সময় ও ইটিএ (ETA) জানুন।</p>
+          </div>
+        </div>
+        <div class="glass-panel text-gray-800 p-4 rounded-2xl flex items-start gap-3">
+          <div class="bg-yellow-100 p-2.5 rounded-xl text-transitYellow-dark">
+            <i data-lucide="log-out" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-transitBlue-dark">স্মার্ট এক্সিট নির্দেশক</h3>
+            <p class="text-xs text-gray-500 mt-0.5">কোন গেট দিয়ে বেরোলে কোথায় যাওয়া যাবে তা চিহ্নিত করুন।</p>
+          </div>
+        </div>
+        <div class="glass-panel text-gray-800 p-4 rounded-2xl flex items-start gap-3">
+          <div class="bg-emerald-100 p-2.5 rounded-xl text-emerald-600">
+            <i data-lucide="bus" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-transitBlue-dark">বাস ও অটো সংযোগ</h3>
+            <p class="text-xs text-gray-500 mt-0.5">মেট্রো গেটের বাইরেই পান বাসের সময়সূচি ও রুট নম্বর।</p>
+          </div>
+        </div>
+        <div class="glass-panel text-gray-800 p-4 rounded-2xl flex items-start gap-3">
+          <div class="bg-amber-100 p-2.5 rounded-xl text-amber-600">
+            <i data-lucide="wifi-off" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-transitBlue-dark">অফলাইন রুট সেভার</h3>
+            <p class="text-xs text-gray-500 mt-0.5">ইন্টারনেট ছাড়াই সেভ করা রুট যেকোনো সময় দেখুন।</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 flex items-center justify-between border-t border-white/20 pt-4 text-xs text-blue-200">
+        <span>সংস্করণ: ২.৪.০ (Version 2.4.0)</span>
+        <span>ডেভেলপড বাই: মেট্রো ট্রাভেল উইং</span>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Mobile App Mockup Frame -->
+    <div class="lg:col-span-5 flex justify-center w-full">
+      <div id="mobile-container" class="phone-mockup flex flex-col justify-between shadow-2xl relative">
+
+        <!-- Phone Notch / Status Bar -->
+        <div
+          class="bg-transitBlue text-white px-6 pt-3 pb-2 flex justify-between items-center text-xs font-semibold select-none z-30 shrink-0">
+          <span class="tracking-wide">5:30 PM</span>
+          <div class="w-16 h-4 bg-black/40 rounded-full hidden sm:block"></div> <!-- Mock Notch -->
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="signal" class="w-3.5 h-3.5"></i>
+            <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
+            <i data-lucide="battery" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <!-- Sticky App Main Header -->
+        <header
+          class="bg-transitBlue text-white px-4 py-3 shadow-md z-20 flex justify-between items-center select-none shrink-0">
+          <div class="flex items-center gap-2">
+            <img src="logo.png" alt="Kolkata Metro Smart Guide App Logo"
+              class="w-8 h-8 rounded-lg shadow border border-white/10 bg-white p-0.5">
+            <div>
+              <h2 class="font-extrabold text-sm tracking-tight flex items-center gap-1.5">
+                মেট্রো গাইড
+                <span id="premium-badge"
+                  class="hidden text-[10px] bg-amber-500 text-transitBlue-dark font-black px-1.5 py-0.5 rounded-full border border-amber-600 flex items-center gap-0.5">
+                  <i data-lucide="crown" class="w-2.5 h-2.5 fill-current"></i> PRO
+                </span>
+              </h2>
+              <p class="text-[10px] text-blue-200 uppercase tracking-widest font-semibold font-sans">Kolkata Metro Guide
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button id="reset-premium" title="রিসেট করুন (Reset App)"
+              class="p-1.5 hover:bg-white/10 rounded-full transition-colors text-white/70 hover:text-white"
+              aria-label="Reset Demo App">
+              <i data-lucide="rotate-ccw" class="w-4.5 h-4.5"></i>
+            </button>
+            <div
+              class="w-8 h-8 rounded-full bg-gradient-to-tr from-transitYellow to-amber-300 flex items-center justify-center font-bold text-transitBlue-dark text-xs border border-white/30 cursor-pointer shadow-inner">
+              ST
+            </div>
+          </div>
+        </header>
+
+        <!-- Main Scrollable Content Area -->
+        <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50 flex flex-col gap-4 pb-6">
+
+          <!-- 1. Live Search & Hero Section -->
+          <section
+            class="bg-gradient-to-b from-transitBlue to-transitBlue-dark text-white px-4 pt-4 pb-6 rounded-b-[24px] shadow-lg shrink-0 relative overflow-hidden">
+            <!-- Background glow decoration -->
+            <div class="absolute -right-16 -bottom-16 w-36 h-36 rounded-full bg-transitYellow opacity-10 blur-xl"></div>
+
+            <h3 class="text-sm font-semibold mb-3 text-blue-100">কোথায় যাত্রা করছেন আজ? (Where are you traveling today?)
+            </h3>
+
+            <!-- Quick Search Widget -->
+            <div class="bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-xl text-gray-800 relative z-10">
+              <div class="flex flex-col gap-3 relative">
+
+                <!-- From Input -->
+                <div class="relative">
+                  <span class="absolute left-3 top-3.5 text-xs font-bold text-transitBlue">From</span>
+                  <input type="text" id="from-station" placeholder="কোথা থেকে... (Departure station)"
+                    class="w-full pl-14 pr-4 py-2.5 bg-gray-50 hover:bg-gray-100/70 focus:bg-white border border-gray-200 focus:border-transitBlue focus:ring-1 focus:ring-transitBlue rounded-xl text-sm font-semibold outline-none transition-all placeholder:text-gray-400 placeholder:font-normal"
+                    autocomplete="off">
+                  <div id="from-suggestions"
+                    class="absolute left-0 right-0 top-12 bg-white border border-gray-100 rounded-xl shadow-xl max-h-48 overflow-y-auto z-50 hidden custom-scrollbar">
+                  </div>
+                </div>
+
+                <!-- Swap Button -->
+                <div class="absolute right-6 top-[34px] z-20">
+                  <button id="swap-stations"
+                    class="w-8 h-8 rounded-full bg-transitBlue text-white shadow-lg flex items-center justify-center border border-white hover:bg-transitBlue-dark transition-all duration-300 focus:outline-none"
+                    aria-label="Swap stations">
+                    <i data-lucide="arrow-up-down" class="w-4 h-4"></i>
+                  </button>
+                </div>
+
+                <!-- To Input -->
+                <div class="relative">
+                  <span class="absolute left-3 top-3.5 text-xs font-bold text-transitYellow-dark">To</span>
+                  <input type="text" id="to-station" placeholder="কোথায় যাবেন... (Destination station)"
+                    class="w-full pl-14 pr-4 py-2.5 bg-gray-50 hover:bg-gray-100/70 focus:bg-white border border-gray-200 focus:border-transitBlue focus:ring-1 focus:ring-transitBlue rounded-xl text-sm font-semibold outline-none transition-all placeholder:text-gray-400 placeholder:font-normal"
+                    autocomplete="off">
+                  <div id="to-suggestions"
+                    class="absolute left-0 right-0 top-12 bg-white border border-gray-100 rounded-xl shadow-xl max-h-48 overflow-y-auto z-50 hidden custom-scrollbar">
+                  </div>
+                </div>
+
+                <!-- Search & Save Buttons -->
+                <div class="flex gap-2 mt-1">
+                  <button id="search-btn"
+                    class="flex-1 bg-transitBlue hover:bg-transitBlue-dark text-white font-bold py-3 px-4 rounded-xl shadow-md transition-all hover:shadow-lg active:scale-[0.98] flex items-center justify-center gap-2 text-sm">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                    <span>রুট খুঁজুন (Search Route)</span>
+                  </button>
+                  <button id="save-current-route-btn" title="রুট সেভ করুন"
+                    class="bg-gray-100 hover:bg-gray-200 text-transitBlue font-bold p-3 rounded-xl shadow-sm transition-all flex items-center justify-center"
+                    aria-label="Save current route">
+                    <i data-lucide="bookmark" class="w-5 h-5"></i>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Search result display area (hidden initially) -->
+            <div id="search-result-card"
+              class="mt-4 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border border-blue-50 hidden animate-fade-in relative">
+              <span
+                class="absolute top-3 right-3 text-xs bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-100 flex items-center gap-0.5">
+                <i data-lucide="check" class="w-3 h-3"></i> দ্রুততম রুট (Fastest)
+              </span>
+              <div id="search-result-text"></div>
+            </div>
+          </section>
+
+          <!-- 2. Interactive Station View Demo (Esplanade / এসপ্ল্যানেড) -->
+          <section class="px-4 flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-extrabold text-gray-800 text-base flex items-center gap-1.5">
+                  <i data-lucide="map-pin" class="w-5 h-5 text-transitBlue"></i>
+                  এসপ্ল্যানেড স্টেশন গাইড
+                </h3>
+                <p class="text-xs text-gray-500 font-medium">Esplanade Station View Demo (Blue Line)</p>
+              </div>
+
+              <span
+                class="text-xs bg-transitYellow/20 text-transitBlue-dark font-bold px-2 py-1 rounded-lg border border-transitYellow/30">মেজর
+                জংশন</span>
+            </div>
+
+            <!-- LIVE Metro Countdown Timings -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+              <span class="font-bold text-sm text-gray-400">অফিশিয়াল সময়সূচীর ওপর ভিত্তি করে সময় দেখানো হচ্ছে</span>
+              <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-3">
+                <div class="flex items-center gap-2">
+
+                  <span class="relative flex h-2.5 w-2.5">
+                    <span
+                      class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500 live-indicator"></span>
+                  </span>
+
+                  <span class="font-bold text-sm text-gray-700">লাইভ ট্রেনের সময়সূচী (Live Train Timings)</span>
+                </div>
+                <span
+                  class="text-[10px] bg-red-50 text-red-600 font-bold px-2 py-0.5 rounded-full border border-red-100 uppercase tracking-wider">Live
+                  ETA</span>
+              </div>
+
+              <!-- Platforms timers -->
+              <div class="grid grid-cols-2 gap-3">
+
+                <!-- Platform 1: Southbound -->
+                <div
+                  class="bg-blue-50/50 rounded-xl p-3 border border-blue-100/60 flex flex-col items-center text-center">
+                  <span class="text-[10px] font-bold text-transitBlue uppercase tracking-wide">Plat 1 • কবি সুভাষ</span>
+                  <span class="text-xs font-semibold text-gray-500 mt-0.5 mb-1.5">To Kavi Subhash (Down)</span>
+                  <span id="down-timer"
+                    class="text-2xl font-black text-transitBlue font-mono tracking-wider">02:45</span>
+                  <span id="down-eta" class="text-[9px] text-gray-400 font-bold mt-1">ETA: Calculating...</span>
+                </div>
+
+                <!-- Platform 2: Northbound -->
+                <div
+                  class="bg-yellow-50/40 rounded-xl p-3 border border-yellow-100/60 flex flex-col items-center text-center">
+                  <span class="text-[10px] font-bold text-transitYellow-dark uppercase tracking-wide">Plat 2 •
+                    দক্ষিণেশ্বর</span>
+                  <span class="text-xs font-semibold text-gray-500 mt-0.5 mb-1.5">To Dakshineswar (Up)</span>
+                  <span id="up-timer"
+                    class="text-2xl font-black text-transitYellow-dark font-mono tracking-wider">05:12</span>
+                  <span id="up-eta" class="text-[9px] text-gray-400 font-bold mt-1">ETA: Calculating...</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Smart Exit Gate Guide & Connecting Bus Routes -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col gap-4">
+
+              <!-- Gate Selection Header -->
+              <div>
+                <h4 class="font-bold text-sm text-gray-700 flex items-center gap-1.5 mb-2.5">
+                  <i data-lucide="log-out" class="w-4 h-4 text-transitBlue"></i>
+                  স্মার্ট এক্সিট নির্দেশক ও কানেক্টিং বাস
+                </h4>
+
+                <!-- Gate Tabs Selector -->
+                <div class="flex gap-2">
+                  <button data-gate="1"
+                    class="gate-tab flex-1 py-2 px-1 text-center font-bold text-xs rounded-xl bg-transitBlue text-white shadow-sm transition-all focus:outline-none">গেট
+                    ১ (Gate 1)</button>
+                  <button data-gate="2"
+                    class="gate-tab flex-1 py-2 px-1 text-center font-bold text-xs rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200/70 transition-all focus:outline-none">গেট
+                    ২ (Gate 2)</button>
+                  <button data-gate="3"
+                    class="gate-tab flex-1 py-2 px-1 text-center font-bold text-xs rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200/70 transition-all focus:outline-none">গেট
+                    ৩ (Gate 3)</button>
+                  <button data-gate="4"
+                    class="gate-tab flex-1 py-2 px-1 text-center font-bold text-xs rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200/70 transition-all focus:outline-none">গেট
+                    ৪ (Gate 4)</button>
+                </div>
+              </div>
+
+              <!-- Gate Details Panel (Populated dynamically) -->
+              <div id="gate-details"
+                class="p-3 bg-slate-50 border border-gray-100 rounded-xl text-left min-h-[85px] transition-all">
+                <!-- Javascript will load this dynamically -->
+              </div>
+
+              <!-- Connecting Transport (Buses) -->
+              <div>
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2 flex items-center gap-1">
+                  <i data-lucide="navigation" class="w-3.5 h-3.5 text-transitYellow-dark"></i>
+                  কানেক্টিং বাস রুট (Available Buses)
+                </p>
+                <div id="bus-routes" class="flex flex-wrap gap-2">
+                  <!-- Bus tags will be loaded dynamically based on selected Gate -->
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- 3. Premium Feature Call-To-Action Banner -->
+          <section id="premium-banner" class="px-4">
+            <div
+              class="premium-shimmer text-white p-5 rounded-2xl shadow-xl flex flex-col gap-3 relative overflow-hidden select-none">
+              <!-- Grid pattern decoration -->
+              <div
+                class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none">
+              </div>
+
+              <div class="flex items-center gap-2 relative z-10">
+                <span class="bg-white/20 p-2 rounded-xl border border-white/20 shadow-inner">
+                  <i data-lucide="wifi-off" class="w-5 h-5 text-white"></i>
+                </span>
+                <div>
+                  <h3 class="font-extrabold text-sm">স্মার্ট রুট সেভার ও অফলাইন মোড</h3>
+                  <p class="text-[9px] uppercase tracking-wider font-semibold text-yellow-200">Smart Route Saver &
+                    Offline Access</p>
+                </div>
+              </div>
+
+              <p class="text-xs leading-relaxed text-yellow-50/90 font-medium font-sans relative z-10">
+                রোজ রোজ রুট সার্চ করার ঝামেলা শেষ! মাত্র ২ টাকায় ৬ মাসের জন্য আপনার প্রতিদিনের রুট সেভ করে রাখুন এবং
+                ইন্টারনেট ছাড়াই অফলাইনে ব্যবহার করুন।
+              </p>
+
+              <button id="pay-btn"
+                class="mt-1 bg-white hover:bg-yellow-50 text-amber-900 font-extrabold text-sm py-3 px-4 rounded-xl shadow-lg transition-all hover:shadow-xl active:scale-[0.98] flex items-center justify-center gap-2 relative z-10 border border-amber-200">
+                <i data-lucide="lock" class="w-4 h-4"></i>
+                <span>মাত্র ২ টাকায় অ্যাক্টিভ করুন (Pay ₹2)</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Premium Active Banner (Hidden initially) -->
+          <section id="premium-active-banner" class="px-4 hidden">
+            <div
+              class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-4 rounded-2xl shadow-md flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="bg-white/25 p-2 rounded-xl border border-white/25">
+                  <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm">প্রিমিয়াম সার্ভিস অ্যাক্টিভ আছে</h4>
+                  <p class="text-[10px] text-emerald-100 font-medium">Premium Active: Valid for 6 Months</p>
+                </div>
+              </div>
+              <span
+                class="bg-white text-emerald-700 text-xs font-black px-2.5 py-1 rounded-lg border border-emerald-100 flex items-center gap-0.5">
+                ACTIVE
+              </span>
+            </div>
+          </section>
+
+          <!-- 4. Saved Routes Dashboard (Visible for Premium Users only) -->
+          <section id="saved-routes-container" class="px-4 flex flex-col gap-3 hidden">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-gray-800 text-sm flex items-center gap-1.5">
+                <i data-lucide="bookmark-check" class="w-5 h-5 text-emerald-600"></i>
+                সংরক্ষিত রুটসমূহ (Saved Offline Routes)
+              </h3>
+              <span
+                class="text-[10px] bg-emerald-50 text-emerald-700 font-semibold px-2 py-0.5 rounded-full border border-emerald-100 flex items-center gap-1">
+                <i data-lucide="wifi-off" class="w-2.5 h-2.5"></i> অফলাইন মোড
+              </span>
+            </div>
+
+            <!-- List of Saved Routes -->
+            <div id="saved-routes-list" class="flex flex-col gap-2">
+              <!-- Dynamically populated from JS -->
+            </div>
+          </section>
+
+        </main>
+
+        <!-- Mock App Tab Navigation Bar -->
+        <footer
+          class="bg-white border-t border-gray-100 py-2.5 px-6 flex justify-between items-center text-gray-400 select-none shrink-0 z-30 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.02)]">
+          <div class="flex flex-col items-center text-transitBlue cursor-pointer">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span class="text-[9px] font-bold mt-1">এক্সপ্লোর (Explore)</span>
+          </div>
+          <div class="flex flex-col items-center hover:text-transitBlue cursor-pointer transition-colors">
+            <i data-lucide="route" class="w-5 h-5"></i>
+            <span class="text-[9px] font-medium mt-1">রুট ম্যাপ (Map)</span>
+          </div>
+          <div class="flex flex-col items-center hover:text-transitBlue cursor-pointer transition-colors">
+            <i data-lucide="ticket" class="w-5 h-5"></i>
+            <span class="text-[9px] font-medium mt-1">টিকিট (Ticket)</span>
+          </div>
+          <div class="flex flex-col items-center hover:text-transitBlue cursor-pointer transition-colors">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+            <span class="text-[9px] font-medium mt-1">সেটিংস (Settings)</span>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 5. Mock Payment Gateway Modal (Paytm/UPI style for ₹2) -->
+  <div id="payment-modal"
+    class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] justify-center items-center p-4 hidden">
+    <div
+      class="bg-white rounded-3xl w-full max-w-sm overflow-hidden shadow-2xl border border-gray-100 animate-slide-up flex flex-col">
+
+      <!-- Modal Header -->
+      <div class="bg-transitBlue text-white p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="bg-white p-1 rounded-lg">
+            <i data-lucide="wallet" class="w-5 h-5 text-transitBlue"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-sm">মেট্রো গেটওয়ে পেমেন্ট</h3>
+            <p class="text-[9px] text-blue-200">Kolkata Metro Gateway v2.0</p>
+          </div>
+        </div>
+        <button id="close-payment" class="p-1 hover:bg-white/10 rounded-full transition-colors"
+          aria-label="Close payment modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-5 flex-1 flex flex-col gap-4 text-center">
+
+        <!-- Merchant Info -->
+        <div>
+          <p class="text-xs text-gray-400 font-bold uppercase tracking-wider">Merchant: Metro Travel Guide Pro</p>
+          <div class="flex items-baseline justify-center gap-1.5 mt-1">
+            <span class="text-xs text-gray-500 font-medium">AMOUNT DUE:</span>
+            <span class="text-3xl font-black text-gray-800">₹2.00</span>
+          </div>
+        </div>
+
+        <!-- Simulated QR Code Section -->
+        <div
+          class="bg-slate-50 border border-dashed border-gray-200 p-4 rounded-2xl flex flex-col items-center relative overflow-hidden">
+          <div
+            class="relative w-36 h-36 bg-white p-2 rounded-xl shadow-sm border border-gray-100 flex items-center justify-center">
+            <!-- Dynamic high-contrast QR Image -->
+            <a id="upi-pay-link" href="#" class="block w-full h-full">
+              <img id="upi-qr-image" src="" alt="UPI QR Code" class="w-full h-full object-contain">
+            </a>
+            <!-- Scan line simulation -->
+            <div
+              class="absolute left-0 right-0 h-0.5 bg-red-500 shadow-md shadow-red-500/50 scan-line pointer-events-none">
+            </div>
+          </div>
+          <p
+            class="text-[10px] text-gray-400 mt-2.5 font-bold uppercase tracking-wider flex items-center gap-1 justify-center">
+            <i data-lucide="scan" class="w-3.5 h-3.5 text-transitBlue"></i>
+            স্ক্যান করতে বা সরাসরি পে করতে ট্যাপ করুন
+          </p>
+        </div>
+
+        <!-- UPI App Icons -->
+        <div>
+          <p class="text-xs text-gray-400 mb-2 font-medium">Or Pay using UPI Apps (অথবা ইউপিআই পেমেন্ট)</p>
+          <div class="flex justify-center gap-4">
+            <div class="flex flex-col items-center cursor-pointer hover:scale-105 transition-transform">
+              <span
+                class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center text-violet-700 font-extrabold text-xs shadow-sm">GPay</span>
+              <span class="text-[9px] text-gray-500 font-semibold mt-1">Google Pay</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer hover:scale-105 transition-transform">
+              <span
+                class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-700 font-extrabold text-xs shadow-sm">PP</span>
+              <span class="text-[9px] text-gray-500 font-semibold mt-1">PhonePe</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer hover:scale-105 transition-transform">
+              <span
+                class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-700 font-extrabold text-xs shadow-sm">Paytm</span>
+              <span class="text-[9px] text-gray-500 font-semibold mt-1">Paytm UPI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timer -->
+        <div
+          class="text-xs text-red-500 font-bold bg-red-50 border border-red-100 py-1.5 px-3 rounded-lg flex items-center gap-1.5 justify-center">
+          <i data-lucide="clock" class="w-4 h-4"></i>
+          <span>লেনদেন শেষ করার সময়: <span id="payment-timer">05:00</span> মিনিট</span>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="bg-gray-50 p-4 border-t border-gray-100 flex gap-3">
+        <button id="confirm-payment"
+          class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm py-3 px-4 rounded-xl shadow-md transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+          <i data-lucide="credit-card" class="w-4 h-4"></i>
+          <span>পেমেন্ট সফল করুন (Simulate Success)</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Initialize Lucide icons on page load
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "kolkata-metro-guide",
+  "version": "1.0.0",
+  "description": "Kolkata Metro & Smart Travel Guide Static Website",
+  "scripts": {
+    "dev": "npx -y http-server . -p 3000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
