@@ -3,17 +3,19 @@
     "name": "Kolkata Metro & Smart Travel Guide",
     "icons": [
         {
-            "src": "./logo.png",
+            "src": "https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=KolkataMetro",
             "type": "image/png",
-            "sizes": "192x192"
+            "sizes": "192x192",
+            "purpose": "any maskable"
         },
         {
-            "src": "./logo.png",
+            "src": "https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=KolkataMetro",
             "type": "image/png",
-            "sizes": "512x512"
+            "sizes": "512x512",
+            "purpose": "any maskable"
         }
     ],
-    "start_url": "/",
+    "start_url": ".",
     "background_color": "#0F4C81",
     "theme_color": "#0F4C81",
     "display": "standalone",
