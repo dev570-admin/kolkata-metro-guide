@@ -1,26 +1,40 @@
-const CACHE_NAME = 'kolkata-metro-v1';
-const ASSETS = [
-    '/',
-    '/index.html',
-    '/app.js',
-    '/style.css', // আপনার সিএসএস ফাইলের নাম আলাদা হলে সেটা দিন
-    '/logo.png'
-];
+const CACHE_NAME = 'kolkata-metro-v2';
 
-// Install Service Worker
+// Install and Skip Waiting
 self.addEventListener('install', (e) => {
-    e.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(ASSETS);
-        })
-    );
+    self.skipWaiting();
 });
 
-// Fetch Assets from Cache when Offline
+// Activate and Clear Old Caches
+self.addEventListener('activate', (e) => {
+    e.waitUntil(
+        caches.keys().then((keys) => {
+            return Promise.all(
+                keys.map((key) => {
+                    if (key !== CACHE_NAME) {
+                        return caches.delete(key);
+                    }
+                })
+            );
+        })
+    );
+    self.clients.claim();
+});
+
+// Dynamic Fetch Strategy (Network first, fallback to cache)
 self.addEventListener('fetch', (e) => {
     e.respondWith(
-        caches.match(e.request).then((cachedResponse) => {
-            return cachedResponse || fetch(e.request);
-        })
+        fetch(e.request)
+            .then((response) => {
+                // Clone and save to cache dynamically
+                if (response && response.status === 200) {
+                    const resClone = response.clone();
+                    caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(e.request, resClone);
+                    });
+                }
+                return response;
+            })
+            .catch(() => caches.match(e.request))
     );
 });
