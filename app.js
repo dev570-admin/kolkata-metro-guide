@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Dynamic QR Generation & Live Handshake
   payBtn.addEventListener('click', () => {
-    const myUPI = "8910376844.etb@icici"; // Keeping your exact verified UPI ID intact
+    const myUPI = "surajit.mridha3449@axisbank"; // Keeping your exact verified UPI ID intact
     const myName = "Kolkata Smart Travel Guide";
     const amount = "2.00";
     const note = "Premium 6 Months Subscription";
@@ -644,7 +644,7 @@ if (confirmBtn) {
       if (typeof displayRoute === "function") {
         displayRoute();
       } else {
-        // যদি আলাদা ফাংশন না থাকে, তবে পেজটি জাস্ট রিলোড করে দিন, কারণ লোকালস্টোরেজ সেভ হয়ে গেছে
+        // যদি আলাদা ফাংশন না থাকে, তবে পেজটি জাস্ট রিলোড করে দিন, কারণ লোকালস্টোরেজ সেভ হয়ে গেছ
         window.location.reload();
       }
 
