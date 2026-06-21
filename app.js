@@ -394,7 +394,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Dynamic QR Generation & Live Handshake
   payBtn.addEventListener('click', () => {
-    const myUPI = "upi://pay?pa=surajit.mridha3449@axisbank&pn=MetroGuide"; // Keeping your exact verified UPI ID intact
+
+    myUPI = "intent://pay?pa=surajit.mridha3449@axisbank&pn=MetroGuide&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end"; // Keeping your exact verified UPI ID intact
     const myName = "Kolkata Smart Travel Guide";
     const amount = "2.00";
     const note = "Premium 6 Months Subscription";
