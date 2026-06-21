@@ -598,8 +598,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // adding serviceWorker file  
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('Service Worker Registered!'))
-      .catch(err => console.log('Service Worker Failed!', err));
+    navigator.serviceWorker.register('/sw.js') // 👈 এখানে শুধু /sw.js করে দিন
+      .then(reg => console.log('Service Worker Registered Successfully!'))
+      .catch(err => console.log('Service Worker Registration Failed!', err));
   });
 }
