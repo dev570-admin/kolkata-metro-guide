@@ -3,7 +3,8 @@ const ASSETS = [
     '/',
     '/index.html',
     '/app.js',
-    '/style.css' // আপনার সিএসএস ফাইলের নাম আলাদা হলে সেটা দিন
+    '/style.css', // আপনার সিএসএস ফাইলের নাম আলাদা হলে সেটা দিন
+    '/logo.png'
 ];
 
 // Install Service Worker
