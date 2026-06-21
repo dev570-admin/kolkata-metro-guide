@@ -502,11 +502,18 @@
         </div>
 
         <!-- UPI Mobile Direct Pay Button -->
-        <div class="mt-4 px-4">
+        <div class="mt-4 px-4 space-y-3">
+          <!-- ১. সরাসরি অ্যাপে যাওয়ার বাটন -->
           <a id="upi-mobile-link" href="#"
             class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-center block transition-transform active:scale-95 text-base shadow-md">
             📱 সরাসরি UPI অ্যাপ থেকে পে করুন
           </a>
+
+          <!-- ২. পেমেন্ট করার পর ইউজার এই বাটনে ক্লিক করবে -->
+          <button id="confirm-payment-btn"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-xl text-center block transition-transform active:scale-95 text-sm">
+            ✅ পেমেন্ট সম্পূর্ণ করেছি, রুট আনলক করুন
+          </button>
         </div>
 
         <!-- UPI App Icons -->

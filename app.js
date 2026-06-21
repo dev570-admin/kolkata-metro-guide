@@ -617,6 +617,59 @@ document.addEventListener('DOMContentLoaded', () => {
   startTimers();
 });
 
+
+const confirmBtn = document.getElementById('confirm-payment-btn');
+
+if (confirmBtn) {
+  confirmBtn.addEventListener('click', function () {
+    // বাটনটিকে লোডিং স্টেটে নিয়ে যাওয়া
+    confirmBtn.disabled = true;
+    confirmBtn.innerHTML = `ভেরিফাই করা হচ্ছে... একটু অপেক্ষা করুন`;
+    confirmBtn.style.backgroundColor = '#6b7280'; // Gray color
+
+    // ৩ সেকেন্ড নকল ভেরিফিকেশন টাইমার
+    setTimeout(() => {
+      // ১. লোকাল স্টোরেজে পেমেন্ট সাকসেস সেভ করা
+      localStorage.setItem('metro_app_paid', 'true');
+
+      // ২. পেমেন্ট মোডালটি লুকিয়ে ফেলা (আপনার মোডালের আইডি যদি আলাদা হয় তবে 'payment-modal' এর জায়গায় সেটি দিন)
+      const paymentModal = document.getElementById('payment-modal');
+      if (paymentModal) {
+        paymentModal.classList.add('hidden'); // অথবা paymentModal.style.display = 'none';
+      }
+
+      alert('🎉 পেমেন্ট সফলভাবে ভেরিফাই করা হয়েছে! আপনার রুটটি আনলক করা হলো।');
+
+
+      if (typeof displayRoute === "function") {
+        displayRoute();
+      } else {
+        // যদি আলাদা ফাংশন না থাকে, তবে পেজটি জাস্ট রিলোড করে দিন, কারণ লোকালস্টোরেজ সেভ হয়ে গেছে
+        window.location.reload();
+      }
+
+      // বাটন আবার আগের মতো করে দেওয়া
+      confirmBtn.disabled = false;
+      confirmBtn.innerText = "✅ পেমেন্ট সম্পূর্ণ করেছি, রুট আনলক করুন";
+      confirmBtn.style.backgroundColor = '#2563eb'; // Blue color
+
+    }, 3000); // ৩ সেকেন্ড টাইমার
+  });
+}
+
+
+// ==========================================
+// আপনার PWA সার্ভিস ওয়ার্কারের কোডটি একদম শেষে থাকবে
+// ==========================================
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('Service Worker Registered Successfully!'))
+      .catch(err => console.log('Service Worker Registration Failed!', err));
+  });
+}
+
+
 // adding serviceWorker file  
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
