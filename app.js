@@ -410,6 +410,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (qrImgEl) qrImgEl.src = qrImageUrl;
     if (payLinkEl) payLinkEl.href = upiString;
 
+    // মোবাইল ডিরেক্ট UPI বাটন সেটআপ
+    const mobilePayBtn = document.getElementById('upi-mobile-link');
+    if (mobilePayBtn) {
+      // ১. বাটনের href-এ সরাসরি ইউপিআই স্ট্রিং সেট করুন
+      mobilePayBtn.href = upiString;
+
+      // ২. মোবাইল ব্রাউজারকে বাধ্য করবে এক্সটার্নাল অ্যাপ (GPay/PhonePe) ওপেন করতে
+      mobilePayBtn.setAttribute('target', '_blank');
+      mobilePayBtn.setAttribute('rel', 'noopener noreferrer');
+
+      // ৩. সেফটি ব্যাকআপ — পুরনো listener থাকলে সরিয়ে নতুন যোগ করুন
+      const newBtn = mobilePayBtn.cloneNode(true);
+      mobilePayBtn.parentNode.replaceChild(newBtn, mobilePayBtn);
+      newBtn.href = upiString;
+      newBtn.setAttribute('target', '_blank');
+      newBtn.setAttribute('rel', 'noopener noreferrer');
+      newBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.href = upiString;
+      });
+    }
+
     paymentModal.classList.remove('hidden');
     paymentModal.classList.add('flex');
     document.body.classList.add('overflow-hidden');
